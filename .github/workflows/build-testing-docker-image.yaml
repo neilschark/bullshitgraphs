@@ -26,5 +26,3 @@ jobs:
         run: docker buildx use arm-x86-multi-builder
       - name: Build Docker image latest
         run: docker buildx build --platform linux/amd64 -t ghcr.io/neilschark/bullshitgraphs:latest_testing . --push
-      - name: Build Docker image tag
-        run: docker buildx build --platform linux/amd64 -t ghcr.io/neilschark/bullshitgraphs:latest_testing:${GITHUB_REF#refs/tags/} . --push
