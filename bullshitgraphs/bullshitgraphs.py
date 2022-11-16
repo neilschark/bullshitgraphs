@@ -4,10 +4,8 @@ import random
 import matplotlib.pyplot as plt
 from typing import List
 
-BASE_FILENAME="develop"
-OUTPUT_TYPE="png"
-
-def create_pie_chart(keywords: List[str], base_filename: str, output_type: str):
+def create_pie_chart(keywords: List[str]):
+    figure = plt.Figure()
     data = []
     explode = []
     biggest_value = 0
@@ -24,13 +22,13 @@ def create_pie_chart(keywords: List[str], base_filename: str, output_type: str):
 
     explode[biggest_iterator] = 0.1
 
-    fig1, ax1 = plt.subplots()
+    ax1 = figure.add_subplot()
     ax1.set_xlabel("Distribution of value")
     ax1.pie(data, explode=explode, labels=keywords, autopct='%1.1f%%',
             shadow=True, startangle=90)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
-    plt.savefig(f"outputs/{base_filename}_pie.{output_type}")
+    return figure
 
 def create_bar_chart(keywords: List[str], base_filename: str, output_type: str):
     data = []
@@ -46,6 +44,8 @@ def create_bar_chart(keywords: List[str], base_filename: str, output_type: str):
 
 
 def main():
+    base_filename="develop"
+    output_type="png"
     keywords = []
     for i, element in enumerate(sys.argv):
         if i == 0:
@@ -54,8 +54,8 @@ def main():
 
     print(f"Your important {len(keywords)} keywords are: {keywords}")
 
-    create_bar_chart(keywords, BASE_FILENAME, OUTPUT_TYPE)
-    create_pie_chart(keywords, BASE_FILENAME, OUTPUT_TYPE)
+    create_bar_chart(keywords, base_filename, output_type)
+    create_pie_chart(keywords, base_filename, output_type)
 
     print("Your important graphs were created")
 
