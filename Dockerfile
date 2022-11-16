@@ -1,4 +1,4 @@
-FROM python:3.10-buster-slim
+FROM python:3.10-slim-bullseye
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update && apt-get upgrade -y
@@ -10,7 +10,10 @@ WORKDIR /app
 COPY pyproject.toml /app/
 COPY poetry.lock /app/
 
-RUN poetry config virtualenvs.create false && poetry install --no-dev
+RUN poetry config virtualenvs.create false && poetry install --only main
 
-COPY . /app/
-ENTRYPOINT ./run.sh
+COPY run_prod.sh /app
+COPY flask-app /app/flask-app
+COPY bullshitgraphs /app/bullshitgraphs
+
+ENTRYPOINT ./run_prod.sh

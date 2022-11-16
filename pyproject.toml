@@ -9,6 +9,7 @@ authors = [
 [tool.poetry.dependencies]
 python = "^3.10"
 matplotlib = "^3.6.2"
+flask = "^2.2.2"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^2.15.5"

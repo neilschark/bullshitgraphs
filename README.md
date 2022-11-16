@@ -11,3 +11,10 @@ poetry install
 poetry shell
 python bullshitgraphs.py importantkeyword1 importantkeyword2 andsoon andsoforth
 ```
+
+
+## Build docker image
+
+```
+docker build -t ghcr.io/neilschark/bullshitgraphs:latest .
+```
